@@ -1,0 +1,86 @@
+body {
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('./img/img.jpg') no-repeat;
+  background-size: 500px ;
+  background-position: bottom right; 
+  background-attachment: fixed;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 50px;
+  color: #303D60;
+  margin-bottom: 50px;
+}
+
+#main{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+#main form {
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+#main #usersFounded {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  width: 500px;
+  flex-flow: column nowrap;
+}
+
+#main #searchResults {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  width: 500px;
+  flex-flow: column nowrap;
+}
+
+li {
+  list-style-type: none;
+}
+
+#main #dataList {
+  margin: 0px;
+  padding: 0px;
+}
+
+#main #container {
+  border-right: solid;
+  border-color: #E7F3FF;
+}
+
+input {
+  width: 80%;
+  height: 25px;
+  border: 0;
+  margin-right: 10px;
+  border-bottom: 1px solid #9FC8FE;
+}  
+
+button {
+  color: #ffff;
+  background-color: #9FC8FE;
+  height: 30px;
+  width: 100px;
+  border-radius: 0.2em;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  border: 0px;
+}
+
+button:hover {
+  background-color: #75A1DE;
+}
+
+img {
+  border-radius: 2em;
+  margin-right: 15px;
+}

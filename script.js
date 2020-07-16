@@ -1,7 +1,9 @@
 let userSearch  = document.getElementById('searchInput');
 let ul = document.getElementById('list');
 let dataListUl = document.getElementById('dataList');
-let userFounded = document.getElementById('usersFounded')
+let form = document.querySelector('#userForm');
+let userMessage = document.getElementById('userMessage')
+let staticsMessage = document.getElementById('staticsMessage');
 
 let allAges = [];
 let allGender = [];
@@ -9,7 +11,6 @@ let maleCount = 0;
 let femaleCount = 0;
 
 const init = () => {
-  const form = document.querySelector('#userForm');
 
   form.addEventListener('keyup', () => {
     if(userSearch.value !== ''){
@@ -30,7 +31,7 @@ const filterUsers = (e) => {
   e.preventDefault();
   dataListUl.innerHTML = '';
   ul.innerHTML = '';
-  userFounded.innerHTML = '';
+  userMessage.innerHTML = '';
   totalUsersFounded = 0;
   allAges = [];
   allGender = [];
@@ -60,7 +61,7 @@ const displayUsers = (user) => {
   let image = document.createElement('img');
   
   image.src = thumbnail;
-  textNome = document.createTextNode(`${first} ${last}, ${age} anos` );
+  textNome = document.createTextNode(` ${first} ${last}, ${age} anos` );
  
   nameSpan.appendChild(textNome);
 
@@ -68,9 +69,8 @@ const displayUsers = (user) => {
   li.appendChild(image);
   li.appendChild(nameSpan);
 
-  allAges.push(age)
-  allGender.push(gender)
- 
+  allAges.push(age);
+  allGender.push(gender);
 }
 
 const staticsCount = (age, gender) => {
@@ -110,11 +110,12 @@ const displayAgeResults = (data) => {
   let femaleValue = document.createElement('p');
   let totalUsers = document.createElement('p');
 
+  staticsMessage.innerHTML = 'Statics'
   ageP.innerHTML = `Sum ages: ${ageSum}`
   averageP.innerHTML = `Average ages: ${ageAverage}`
   maleValue.innerHTML = `Total men: ${maleCount}`
   femaleValue.innerHTML = `Total women: ${femaleCount}`
-  totalUsers.innerHTML = `Users founded: ${totalUsersFounded}`
+  userMessage.innerHTML = `${totalUsersFounded}: Users Found `
 
   dataListUl.appendChild(li);
   li.appendChild(ageP)
