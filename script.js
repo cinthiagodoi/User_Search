@@ -7,8 +7,7 @@ let staticsMessage = document.getElementById('staticsMessage');
 
 let allAges = [];
 let allGender = [];
-let maleCount = 0;
-let femaleCount = 0;
+let genders = { female: 0, male: 0}
 
 const init = () => {
 
@@ -29,21 +28,14 @@ const fetchUsers = async () => {
 
 const filterUsers = (e) => {
   e.preventDefault();
-  dataListUl.innerHTML = '';
-  ul.innerHTML = '';
-  userMessage.innerHTML = '';
-  totalUsersFounded = 0;
-  allAges = [];
-  allGender = [];
-  maleCount = 0;
-  femaleCount = 0;  
+  newFunction();  
 
   fetchUsers().then((response) => {
     const data = response.results;
     data.filter(byName).forEach(user => {
       displayUsers(user);   
     });
-    staticsCount(allAges, allGender);
+    staticsCount();
   });
 }
 
@@ -71,29 +63,20 @@ const displayUsers = (user) => {
 
   allAges.push(age);
   allGender.push(gender);
+  
+  genders[gender] += 1
 }
 
-const staticsCount = (age, gender) => {
+const staticsCount = () => {
 
-  let ageSum = age.reduce((accum, curr) => accum + curr)
-  let ageAverage = (ageSum/age.length).toFixed(2)
-  
- 
-  gender.forEach(sex => {
-    if(sex == 'male'){
-      maleCount ++
-    }else {
-      femaleCount ++
-    }
-  })
-
-  let totalUsersFounded = maleCount + femaleCount
+  let ageSum = allAges.reduce((accum, curr) => accum + curr)
+  let ageAverage = (ageSum/allAges.length).toFixed(2)
+  let totalUsersFounded = allAges.length
 
   const data = {
     ageSum: ageSum,
     ageAverage: ageAverage, 
-    maleCount: maleCount,
-    femaleCount: femaleCount,
+    genders,
     totalUsersFounded: totalUsersFounded
   }
 
@@ -101,20 +84,20 @@ const staticsCount = (age, gender) => {
 }
 
 const displayAgeResults = (data) => {
-  const {maleCount, femaleCount, ageSum, ageAverage, totalUsersFounded} = data
-
+  const {genders: {female, male}, ageSum, ageAverage, totalUsersFounded} = data
+  console.log(female)
+  
   let li = document.createElement('li');
   let ageP= document.createElement('p');
   let averageP = document.createElement('p');
   let maleValue = document.createElement('p');
   let femaleValue = document.createElement('p');
-  let totalUsers = document.createElement('p');
 
   staticsMessage.innerHTML = 'Statics'
   ageP.innerHTML = `Sum ages: ${ageSum}`
   averageP.innerHTML = `Average ages: ${ageAverage}`
-  maleValue.innerHTML = `Total men: ${maleCount}`
-  femaleValue.innerHTML = `Total women: ${femaleCount}`
+  maleValue.innerHTML = `Total men: ${male}`
+  femaleValue.innerHTML = `Total women: ${female}`
   userMessage.innerHTML = `${totalUsersFounded}: Users Found `
 
   dataListUl.appendChild(li);
@@ -122,9 +105,19 @@ const displayAgeResults = (data) => {
   li.appendChild(averageP)
   li.appendChild(maleValue)
   li.appendChild(femaleValue)
-  
-  userFounded.appendChild(totalUsers)
+}
+
+function newFunction() {
+  dataListUl.innerHTML = '';
+  ul.innerHTML = '';
+  userMessage.innerHTML = '';
+  totalUsersFounded = 0;
+  allAges = [];
+  allGender = [];
+  genders = { female: 0, male: 0}
 }
 
 init();
+
+
 
