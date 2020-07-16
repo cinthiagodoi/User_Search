@@ -1,6 +1,7 @@
 let userSearch  = document.getElementById('searchInput');
 let ul = document.getElementById('list');
 let dataListUl = document.getElementById('dataList');
+let userFounded = document.getElementById('usersFounded')
 
 let allAges = [];
 let allGender = [];
@@ -29,6 +30,8 @@ const filterUsers = (e) => {
   e.preventDefault();
   dataListUl.innerHTML = '';
   ul.innerHTML = '';
+  userFounded.innerHTML = '';
+  totalUsersFounded = 0;
   allAges = [];
   allGender = [];
   maleCount = 0;
@@ -37,7 +40,7 @@ const filterUsers = (e) => {
   fetchUsers().then((response) => {
     const data = response.results;
     data.filter(byName).forEach(user => {
-      displayUsers(user);     
+      displayUsers(user);   
     });
     staticsCount(allAges, allGender);
   });
@@ -45,7 +48,7 @@ const filterUsers = (e) => {
 
 const byName = (user) => {
   const name = [user.name.first, user.name.last].join(' ').toLowerCase();
-  return name.includes(userSearch.value);
+  return name.includes(userSearch.value.toLowerCase());
 }
 
 
@@ -74,7 +77,8 @@ const staticsCount = (age, gender) => {
 
   let ageSum = age.reduce((accum, curr) => accum + curr)
   let ageAverage = (ageSum/age.length).toFixed(2)
-
+  
+ 
   gender.forEach(sex => {
     if(sex == 'male'){
       maleCount ++
@@ -83,35 +87,42 @@ const staticsCount = (age, gender) => {
     }
   })
 
+  let totalUsersFounded = maleCount + femaleCount
+
   const data = {
     ageSum: ageSum,
     ageAverage: ageAverage, 
     maleCount: maleCount,
-    femaleCount: femaleCount
+    femaleCount: femaleCount,
+    totalUsersFounded: totalUsersFounded
   }
 
   displayAgeResults(data);
 }
 
 const displayAgeResults = (data) => {
-  const {maleCount, femaleCount, ageSum, ageAverage} = data
+  const {maleCount, femaleCount, ageSum, ageAverage, totalUsersFounded} = data
 
   let li = document.createElement('li');
   let ageP= document.createElement('p');
   let averageP = document.createElement('p');
-  let maleValue = document.createElement('p')
-  let femaleValue = document.createElement('p')
+  let maleValue = document.createElement('p');
+  let femaleValue = document.createElement('p');
+  let totalUsers = document.createElement('p');
 
   ageP.innerHTML = `Sum ages: ${ageSum}`
   averageP.innerHTML = `Average ages: ${ageAverage}`
   maleValue.innerHTML = `Total men: ${maleCount}`
   femaleValue.innerHTML = `Total women: ${femaleCount}`
+  totalUsers.innerHTML = `Users founded: ${totalUsersFounded}`
 
   dataListUl.appendChild(li);
   li.appendChild(ageP)
   li.appendChild(averageP)
   li.appendChild(maleValue)
-  li.appendChild(femaleValue)  
+  li.appendChild(femaleValue)
+  
+  userFounded.appendChild(totalUsers)
 }
 
 init();
