@@ -1,4 +1,4 @@
-# Ecoleta
+# User_Search
 
 User search, using external API with Fetch, Javascript, HTML, CSS
 
