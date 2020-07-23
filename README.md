@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # User_Search
 
 User search, using external API with Fetch, Javascript, HTML, CSS
@@ -20,4 +21,7 @@ Clone the repo in your machine, and open the index.html file.
 
 * This project is part of the IGTI Bootcamp challenge
 
+=======
+Simple web page, buildin with HTML, CSS, Javascript.
+>>>>>>> 50578a1bac41156a6980eec5317ff9840263cd0c
 
