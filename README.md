@@ -14,13 +14,10 @@ Clone the repo in your machine, and open the index.html file.
 
 ## Authors
 
-* **Cinthia Goodi** 
+* **Cinthia Godoi** 
 
 ## Acknowledgments
 
 * This project is part of the IGTI Bootcamp challenge
-
-=======
-Simple web page, buildin with HTML, CSS, Javascript.
 
 
